@@ -3,6 +3,7 @@ package com.dktechhub.auth_service.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class TenantController {
 
     private final TenantService tenantService;
-
+    @PreAuthorize("hasAuthority('SYSTEM_ADMIN')")
     @PostMapping
     public ResponseEntity<TenantResponse> create(@RequestBody CreateTenantRequest request) {
         return ResponseEntity.ok(tenantService.createTenant(request));

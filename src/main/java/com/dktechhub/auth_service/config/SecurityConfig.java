@@ -4,6 +4,7 @@ import com.dktechhub.auth_service.security.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -27,6 +28,9 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/tenants").hasAuthority("SYSTEM_ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/tenants/**").hasAuthority("SYSTEM_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/tenants/**").hasAuthority("SYSTEM_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

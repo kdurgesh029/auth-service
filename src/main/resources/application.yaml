@@ -23,3 +23,10 @@ spring:
 logging:
   level:
     org.hibernate.SQL: DEBUG
+
+
+system:
+  admin:
+    email: sysadmin
+    password: sys@123
+    authority: SYSTEM_ADMIN

@@ -2,6 +2,7 @@ package com.dktechhub.auth_service.service.implementations;
 
 import java.util.List;
 
+import com.dktechhub.auth_service.service.BootstrapService;
 import com.dktechhub.auth_service.service.interfaces.TenantService;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class TenantServiceImpl implements TenantService {
 
     private final TenantRepository tenantRepository;
+    private final BootstrapService bootstrapService;
 
     @Override
     public TenantResponse createTenant(CreateTenantRequest request) {
@@ -30,6 +32,8 @@ public class TenantServiceImpl implements TenantService {
         tenant.setDescription(request.getDescription());
 
         Tenant saved = tenantRepository.save(tenant);
+
+        bootstrapService.bootstrapTenantAdmin(saved.getId(), saved.getName());
 
         return new TenantResponse(saved.getId(), saved.getName(), saved.getDescription());
     }

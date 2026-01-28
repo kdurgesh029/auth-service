@@ -1,5 +1,6 @@
 package com.dktechhub.auth_service.service.implementations;
 
+import com.dktechhub.auth_service.config.SystemAdminConfig;
 import com.dktechhub.auth_service.dao.UserRepository;
 import com.dktechhub.auth_service.dto.LoginRequest;
 import com.dktechhub.auth_service.dto.LoginResponse;
@@ -20,9 +21,21 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-
+    private final SystemAdminConfig sysAdminConfig;
     @Override
     public LoginResponse login(LoginRequest request) {
+
+        if(request.getEmail().equals(sysAdminConfig.getEmail()) &&
+                request.getPassword().equals(sysAdminConfig.getPassword())) {
+
+            String token = jwtService.generateToken(
+                    sysAdminConfig.getEmail(),
+                    List.of(sysAdminConfig.getAuthority()),
+                    null
+            );
+
+            return new LoginResponse(token);
+        }
 
         User user = userRepository
                 .findByTenantIdAndEmail(request.getTenantId(), request.getEmail())
@@ -38,7 +51,11 @@ public class AuthServiceImpl implements AuthService {
                 .distinct()
                 .toList();
 
-        String token = jwtService.generateToken(user, functions);
+        String token = jwtService.generateToken(
+                user.getEmail(),
+                functions,
+                user.getTenant().getId()
+        );
 
         return new LoginResponse(token);
     }
