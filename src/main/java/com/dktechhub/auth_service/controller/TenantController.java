@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dktechhub.auth_service.dto.CreateTenantRequest;
 import com.dktechhub.auth_service.dto.TenantResponse;
-import com.dktechhub.auth_service.service.TenantService;
+import com.dktechhub.auth_service.service.interfaces.TenantService;
 
 import lombok.RequiredArgsConstructor;
 

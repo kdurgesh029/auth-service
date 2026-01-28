@@ -1,7 +1,8 @@
-package com.dktechhub.auth_service.service;
+package com.dktechhub.auth_service.service.implementations;
 
 import java.util.List;
 
+import com.dktechhub.auth_service.service.interfaces.TenantService;
 import org.springframework.stereotype.Service;
 
 import com.dktechhub.auth_service.dao.TenantRepository;

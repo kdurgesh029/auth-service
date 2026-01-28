@@ -2,7 +2,7 @@ package com.dktechhub.auth_service.controller;
 
 import com.dktechhub.auth_service.dto.CreateFunctionRequest;
 import com.dktechhub.auth_service.dto.FunctionResponse;
-import com.dktechhub.auth_service.service.AppFunctionService;
+import com.dktechhub.auth_service.service.interfaces.AppFunctionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

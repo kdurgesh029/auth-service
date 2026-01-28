@@ -1,4 +1,4 @@
-package com.dktechhub.auth_service.service;
+package com.dktechhub.auth_service.service.interfaces;
 
 import com.dktechhub.auth_service.dto.CreateUserGroupRequest;
 import com.dktechhub.auth_service.dto.UserGroupResponse;

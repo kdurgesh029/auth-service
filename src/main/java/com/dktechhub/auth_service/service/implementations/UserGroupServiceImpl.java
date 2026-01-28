@@ -1,4 +1,4 @@
-package com.dktechhub.auth_service.service;
+package com.dktechhub.auth_service.service.implementations;
 
 import com.dktechhub.auth_service.dao.AppFunctionRepository;
 import com.dktechhub.auth_service.dao.TenantRepository;
@@ -8,6 +8,7 @@ import com.dktechhub.auth_service.dto.UserGroupResponse;
 import com.dktechhub.auth_service.model.AppFunction;
 import com.dktechhub.auth_service.model.Tenant;
 import com.dktechhub.auth_service.model.UserGroup;
+import com.dktechhub.auth_service.service.interfaces.UserGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

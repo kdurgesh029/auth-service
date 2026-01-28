@@ -1,4 +1,4 @@
-package com.dktechhub.auth_service.service;
+package com.dktechhub.auth_service.service.interfaces;
 
 import java.util.List;
 

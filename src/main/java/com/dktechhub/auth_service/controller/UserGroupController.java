@@ -2,7 +2,7 @@ package com.dktechhub.auth_service.controller;
 
 import com.dktechhub.auth_service.dto.CreateUserGroupRequest;
 import com.dktechhub.auth_service.dto.UserGroupResponse;
-import com.dktechhub.auth_service.service.UserGroupService;
+import com.dktechhub.auth_service.service.interfaces.UserGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
