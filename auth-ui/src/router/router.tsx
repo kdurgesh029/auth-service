@@ -3,7 +3,9 @@ import LoginPage from "../auth/LoginPage";
 import ProtectedRoute from "../auth/ProtectedRoute";
 
 import SystemAdminLayout from "../layout/SystemAdminLayout";
-import TenantAdminLayout from "../layout/TenantAdminLayout";
+//import TenantAdminLayout from "../layout/TenantAdminLayout";
+
+import TenantAdminHome from "../layout/TenantAdminHome";
 
 // System Admin Pages
 import SystemDashboard from "../system-admin/pages/Dashboard";
@@ -43,7 +45,7 @@ export default function Router() {
           path="/tenant-admin"
           element={
             <ProtectedRoute role="TENANT_ADMIN">
-              <TenantAdminLayout />
+              <TenantAdminHome />
             </ProtectedRoute>
           }
         >
