@@ -27,6 +27,6 @@ logging:
 
 system:
   admin:
-    email: sysadmin
+    email: sysadmin@test.com
     password: sys@123
     authority: SYSTEM_ADMIN
