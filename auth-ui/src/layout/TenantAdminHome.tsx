@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/app-sidebar"
+import { AppSidebar, type NavItem } from "@/components/app-sidebar"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,11 +13,56 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import FunctionsPage from "@/tenant-admin/pages/FunctionsPage";
+import GroupsPage from "@/tenant-admin/pages/GroupsPage";
+import UsersPage from "@/tenant-admin/pages/UsersPage";
+import { useState } from "react";
+
 
 export default function Page() {
+  const [currentNavItem, setCurrentNavItem] = useState("users");
+
+  const data: NavItem[] = [
+    {
+      id: "",
+      title: "Security Management",
+      items: [
+        {
+          id: "",
+          title: "User Administration",
+          url: "#",
+          items: [
+            { title: "User Maintenance", url: "#", id: "users" },
+            { title: "User Group Maintenance", url: "#", id: "groups" },
+            { title: "Function Maintenance", url: "#", id: "functions" },
+            { title: "User – User Group Map", url: "#", id: "user-usergroup-map" },
+            { title: "User Group – Function Map", url: "#", id: "usergroup-function-map" }
+          ]
+        },
+        {
+          id: "",
+          title: "User Activity Report",
+          url: "#",
+          items: [
+            { title: "Currently Logged In Users", url: "#", isActive: true, id: "currentUsers" },
+            { title: "Disabled Users", url: "#", id: "" },
+            { title: "Deleted Users", url: "#", id: "" },
+          ],
+        },
+      ],
+    },
+  ]
+
+
+
+  const handleItemSelected = (item: NavItem) => {
+    console.log(item);
+    setCurrentNavItem(item.id);
+  }
+
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar navData={data} onItemSelect={handleItemSelected} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
@@ -40,12 +85,10 @@ export default function Page() {
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-            <div className="bg-muted/50 aspect-video rounded-xl" />
-          </div>
-          <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
+          {currentNavItem === 'users' && <UsersPage />}
+          {currentNavItem === 'groups' && <GroupsPage />}
+          {currentNavItem === 'functions' && <FunctionsPage />}
+
         </div>
       </SidebarInset>
     </SidebarProvider>

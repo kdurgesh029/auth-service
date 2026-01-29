@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUsers, createUser } from "../../api/usersAPI";
+import { getUsers, createUser } from "../../api/usersApi";
 
 export default function UsersPage() {
   const [users, setUsers] = useState<any[]>([]);
