@@ -1,9 +1,8 @@
 import { Outlet, Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../auth/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 export default function SystemAdminLayout() {
-  const { logout } = useContext(AuthContext);
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
