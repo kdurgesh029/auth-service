@@ -1,0 +1,16 @@
+[
+  {
+    "id": "sysadmin",
+    "title": "System Administration",
+    "items": [
+      {
+        "id": "applnadmin",
+        "title": "Applications Administration",
+        "url": "#",
+        "items": [
+          { "id": "tenants", "title": "Tenants Maintenance", "url": "#" }
+        ]
+      }
+    ]
+  }
+]

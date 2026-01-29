@@ -1,0 +1,30 @@
+[
+  {
+    "id": "security",
+    "title": "Security Management",
+    "items": [
+      {
+        "id": "user-admin",
+        "title": "User Administration",
+        "url": "#",
+        "items": [
+          { "id": "users", "title": "User Maintenance", "url": "#" },
+          { "id": "groups", "title": "User Group Maintenance", "url": "#" },
+          { "id": "functions", "title": "Function Maintenance", "url": "#" },
+          { "id": "user-usergroup-map", "title": "User – User Group Map", "url": "#" },
+          { "id": "usergroup-function-map", "title": "User Group – Function Map", "url": "#" }
+        ]
+      },
+      {
+        "id": "user-activity",
+        "title": "User Activity Report",
+        "url": "#",
+        "items": [
+          { "id": "currentUsers", "title": "Currently Logged In Users", "url": "#", "isActive": true },
+          { "id": "disabledUsers", "title": "Disabled Users", "url": "#" },
+          { "id": "deletedUsers", "title": "Deleted Users", "url": "#" }
+        ]
+      }
+    ]
+  }
+]

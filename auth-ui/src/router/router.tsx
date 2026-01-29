@@ -2,9 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "../auth/LoginPage";
 import ProtectedRoute from "../auth/ProtectedRoute";
 
-import SystemAdminLayout from "../layout/SystemAdminLayout";
+//import SystemAdminLayout from "../layout/SystemAdminLayout";
 //import TenantAdminLayout from "../layout/TenantAdminLayout";
 
+import SystemAdminHome from "../layout/SystemAdminHome";
 import TenantAdminHome from "../layout/TenantAdminHome";
 
 // System Admin Pages
@@ -32,7 +33,7 @@ export default function Router() {
           path="/system-admin"
           element={
             <ProtectedRoute role="SYSTEM_ADMIN">
-              <SystemAdminLayout />
+              <SystemAdminHome />
             </ProtectedRoute>
           }
         >
