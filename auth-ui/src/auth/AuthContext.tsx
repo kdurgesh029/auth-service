@@ -20,12 +20,17 @@ function parseJwtPayload(token: string): any | null {
   }
 }
 
-function deriveRoleFromToken(token: string): { role: Role; tenantId: number | null; email: string | null } {
+function deriveRoleFromToken(token: string): { role: Role; tenantId: number | null; email: string | null; authorities: string[] } {
   const payload = parseJwtPayload(token);
   const tenantId = payload?.tenantId ?? null;
   const email = payload?.sub ?? null;
+  const authorities: string[] = Array.isArray(payload?.authorities)
+    ? payload.authorities
+    : typeof payload?.authorities === "string"
+    ? [payload.authorities]
+    : [];
   const role: Role = tenantId == null ? "SYSTEM_ADMIN" : "TENANT_ADMIN";
-  return { role, tenantId, email };
+  return { role, tenantId, email, authorities };
 }
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -36,6 +41,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     role: existingDerived?.role ?? null,
     tenantId: existingDerived?.tenantId ?? null,
     email: existingDerived?.email ?? null,
+    authorities: existingDerived?.authorities ?? [],
   });
 
   const login = (token: string) => {
@@ -46,6 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       role: derived.role,
       tenantId: derived.tenantId,
       email: derived.email,
+      authorities: derived.authorities,
     });
     return derived.role;
   };

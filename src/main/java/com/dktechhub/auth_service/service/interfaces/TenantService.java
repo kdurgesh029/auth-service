@@ -12,4 +12,8 @@ public interface TenantService {
     List<TenantResponse> getAllTenants();
 
     TenantResponse getTenant(Long id);
+
+    TenantResponse updateTenant(Long id, CreateTenantRequest request);
+
+    void deleteTenant(Long id);
 }

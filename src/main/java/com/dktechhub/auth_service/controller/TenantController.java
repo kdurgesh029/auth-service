@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,5 +39,21 @@ public class TenantController {
     @GetMapping("/{id}")
     public ResponseEntity<TenantResponse> get(@PathVariable Long id) {
         return ResponseEntity.ok(tenantService.getTenant(id));
+    }
+
+    @PreAuthorize("hasAuthority('SYSTEM_ADMIN')")
+    @PutMapping("/{id}")
+    public ResponseEntity<TenantResponse> update(
+            @PathVariable Long id,
+            @RequestBody CreateTenantRequest request
+    ) {
+        return ResponseEntity.ok(tenantService.updateTenant(id, request));
+    }
+
+    @PreAuthorize("hasAuthority('SYSTEM_ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        tenantService.deleteTenant(id);
+        return ResponseEntity.noContent().build();
     }
 }

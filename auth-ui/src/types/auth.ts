@@ -5,6 +5,7 @@ export interface AuthState {
   role: Role | null;
   tenantId?: number | null;
   email?: string | null;
+  authorities?: string[];
 }
 
 export interface AuthContextValue extends AuthState {

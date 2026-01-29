@@ -53,4 +53,24 @@ public class TenantServiceImpl implements TenantService {
 
         return new TenantResponse(t.getId(), t.getName(), t.getDescription());
     }
+
+    @Override
+    public TenantResponse updateTenant(Long id, CreateTenantRequest request) {
+        Tenant tenant = tenantRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tenant not found"));
+
+        tenant.setName(request.getName());
+        tenant.setDescription(request.getDescription());
+
+        Tenant saved = tenantRepository.save(tenant);
+        return new TenantResponse(saved.getId(), saved.getName(), saved.getDescription());
+    }
+
+    @Override
+    public void deleteTenant(Long id) {
+        if (!tenantRepository.existsById(id)) {
+            throw new RuntimeException("Tenant not found");
+        }
+        tenantRepository.deleteById(id);
+    }
 }

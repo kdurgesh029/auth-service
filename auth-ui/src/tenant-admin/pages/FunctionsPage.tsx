@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
-import { getFunctions, createFunction } from "../../api/functionsApi";
+import { getFunctionsByTenant, createFunction } from "../../api/functionsApi";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function FunctionsPage() {
   const [functions, setFunctions] = useState<any[]>([]);
   const [functionCode, setFunctionCode] = useState("");
   const [description, setDescription] = useState("");
+  const { tenantId } = useAuth();
 
   const loadFunctions = async () => {
-    const res = await getFunctions();
+    if (!tenantId) return;
+    const res = await getFunctionsByTenant(tenantId);
     setFunctions(res.data);
   };
 
   useEffect(() => {
     loadFunctions();
-  }, []);
+  }, [tenantId]);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();

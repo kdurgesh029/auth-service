@@ -1,8 +1,9 @@
 import api from "./axios";
 
-export const getFunctions = () => api.get("/functions");
+export const getFunctionsByTenant = (tenantId: number) =>
+  api.get(`/api/functions/tenant/${tenantId}`);
 
 export const createFunction = (data: {
   functionCode: string;
   description: string;
-}) => api.post("/functions", data);
+}) => api.post("/api/functions", data);
